@@ -10,8 +10,8 @@ else
         echo "$GIT_USER ALL=(daemon) SETENV: NOPASSWD: /bin/ls, /usr/bin/git, /usr/bin/git-upload-pack, /usr/bin/git-receive-pack, /usr/bin/ssh" >> /etc/sudoers
 fi
 
-cp /var/www/phabric/phabricator/resources/sshd/phabricator-ssh-hook.sh /usr/libexec/phabricator-ssh-hook.sh
 mkdir /usr/libexec
+cp /var/www/phabric/phabricator/resources/sshd/phabricator-ssh-hook.sh /usr/libexec/phabricator-ssh-hook.sh
 sed -i "s/vcs-user/$GIT_USER/g" /usr/libexec/phabricator-ssh-hook.sh
 sed -i "s/\/path\/to\/phabricator/\/var\/www\/phabric\/phabricator/g" /usr/libexec/phabricator-ssh-hook.sh
 chmod 755 /usr/libexec/phabricator-ssh-hook.sh
