@@ -2,7 +2,7 @@
 
 sleep 30
 
-adduser $GIT_USER
+useradd $GIT_USER
 usermod -p NP $GIT_USER
 
 cp /var/www/phabric/phabricator/resources/sshd/phabricator-ssh-hook.sh /usr/libexec/phabricator-ssh-hook.sh
