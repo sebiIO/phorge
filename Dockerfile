@@ -35,4 +35,4 @@ COPY ./scripts/startup.sh /startup.sh
 #copy startup script
 RUN mkdir -p /var/repo/ && rm -rf /var/cache/apt
 #startup script
-ENTRYPOINT [ "/startup.sh" ]
+CMD [ "/startup.sh" ]
