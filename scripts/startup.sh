@@ -11,13 +11,14 @@ else
 fi
 
 cp /var/www/phabric/phabricator/resources/sshd/phabricator-ssh-hook.sh /usr/libexec/phabricator-ssh-hook.sh
-sed "s/vcs-user/$GIT_USER/g" /usr/libexec/phabricator-ssh-hook.sh
-sed "s/\/path\/to\/phabricator/\/var\/www\/phabric\/phabricator/g" /usr/libexec/phabricator-ssh-hook.sh
+mkdir /usr/libexec
+sed -i "s/vcs-user/$GIT_USER/g" /usr/libexec/phabricator-ssh-hook.sh
+sed -i "s/\/path\/to\/phabricator/\/var\/www\/phabric\/phabricator/g" /usr/libexec/phabricator-ssh-hook.sh
 chmod 755 /usr/libexec/phabricator-ssh-hook.sh
 
 cp /var/www/phabric/phabricator/resources/sshd/sshd_config.phabricator.example /etc/ssh/sshd_config.phabricator
-sed "s/vcs-user/$GIT_USER/g" /etc/ssh/sshd_config.phabricator
-sed "s/2222/$SSH_PORT/g" /etc/ssh/sshd_config.phabricator
+sed -i "s/vcs-user/$GIT_USER/g" /etc/ssh/sshd_config.phabricator
+sed -i "s/2222/$SSH_PORT/g" /etc/ssh/sshd_config.phabricator
 
 #SSH Configuration
 /var/www/phabric/phabricator/bin/config set diffusion.ssh-port $SSH_PORT
