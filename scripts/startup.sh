@@ -29,13 +29,32 @@ sed "s/2222/$SSH_PORT/g" /etc/ssh/sshd_config.phabricator
 /var/www/phabric/phabricator/bin/config set mysql.user $MYSQL_USER
 /var/www/phabric/phabricator/bin/config set mysql.pass $MYSQL_PASSWORD
 #Large file storage configuration
-[ ! -z "$MINIO_SERVER" ]
+if [ ! -z "$MINIO_SERVER" ]
 then
     /var/www/phabric/phabricator/bin/config set storage.s3.bucket $MINIO_SERVER
     /var/www/phabric/phabricator/bin/config set amazon-s3.secret-key $MINIO_SERVER_SECRET_KEY
     /var/www/phabric/phabricator/bin/config set amazon-s3.access-key $MINIO_SERVER_ACCESS_KEY
     /var/www/phabric/phabricator/bin/config set amazon-s3.endpoint $MINIO_SERVER:$MINIO_PORT
     # /var/www/phabric/phabricator/bin/config set amazon-s3.region us-west-1
+fi
+
+if [ ! -z "$SMTP_SERVER" ] && [ ! -z "$SMTP_PORT" ] && [ ! -z "$SMTP_USER" ] && [ ! -z "$SMTP_PASSWORD" ] &&  [ ! -z "$SMTP_PROTOCOL" ]
+then
+    echo "[
+  {
+    \"key\": \"stmp-mailer\",
+    \"type\": \"smtp\",
+    \"options\": {
+      \"host\": \"$SMTP_SERVER\",
+      \"port\": $SMTP_PORT,
+      \"user\": \"$SMTP_USER\",
+      \"password\": \"$SMTP_PASSWORD\",
+      \"protocol\": \"$SMTP_PROTOCOL\"
+    }
+  }
+]" > mailer.json
+    /var/www/phabric/phabricator/bin/config set cluster.mailers --stdin < mailers.json
+    rm mailers.json
 fi
 
 # Update base uri

@@ -27,6 +27,11 @@ To startup Phabricator with a single command you need configured MySQL/MariaDB a
 |MINIO_PORT||
 |MINIO_SERVER_SECRET_KEY||
 |MINIO_SERVER_ACCESS_KEY||
+|SMTP_SERVER||
+|SMTP_PORT||
+|SMTP_USER||
+|SMTP_PASSWORD||
+|SMTP_PROTOCOL||
 
 #### Example command to start:
 ```
