@@ -13,12 +13,27 @@ Application configured as a single image with `supervisord` to control all neces
 
 To startup Phabricator with a single command you need configured MySQL/MariaDB and S3 storage (Local server or AWS)
 
+### Variables
+|Name|Default Value|
+|---|---|
+|SSH_PORT|8022|
+|GIT_USER|git|
+|MYSQL_HOST||
+|MYSQL_PORT|3306|
+|MYSQL_USER||
+|MYSQL_PASSWORD||
+|BASE_URI||
+|MINIO_SERVER||
+|MINIO_PORT||
+|MINIO_SERVER_SECRET_KEY||
+|MINIO_SERVER_ACCESS_KEY||
+
 #### Example command to start:
 ```
 docker run \
     --rm \
     -p 80:80 \
-    -p 22:22 \
+    -p 8022:8022 \
     --env MYSQL_HOST=mysqlhost.com \
     --env MYSQL_PORT=3306 \
     --env MYSQL_USER=root \
@@ -30,20 +45,12 @@ docker run \
     rivshiell/phabricator-docker:latest
 ```
 
-
 ### To launch all components of Phabricator using `docker-compose` use following set of commands:
 #### `amd64` arch:
 ```
 export BASE_URI=yourdomain.com
 export MYSQL_ROOT_PASSWORD=changeme
 docker-compose up -d
-```
-
-#### `arm` arch:
-```
-export BASE_URI=yourdomain.com
-export MYSQL_ROOT_PASSWORD=changeme
-docker-compose -f docker-compose.armv7.yml up -d
 ```
 
 ## Links

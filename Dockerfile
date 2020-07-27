@@ -1,23 +1,25 @@
 FROM debian:buster
 
-LABEL maintainer="aliaksandr.shulyak@gmail.com"
+LABEL maintainer="buddyspencer@protonmail.com"
 
-EXPOSE 22 80 443
+ENV SSH_PORT=8022 GIT_USER=git MYSQL_PORT=3306
 
-RUN apt-get update -y
-RUN apt-get -y install lsb-release apt-transport-https ca-certificates wget git
+EXPOSE 8022 80 443
+
+RUN apt-get update -y && apt-get install -y wget && \
+    wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
+    echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" >> /etc/apt/sources.list.d/php.list && \
+    apt-get update -y && \
+    apt-get -y install lsb-release apt-transport-https ca-certificates wget git \
+    php7.4 php7.4-mysql php7.4-gd php7.4-curl php7.4-apcu php7.4-cli php7.4-json php7.4-mbstring php7.4-fpm php7.4-zip php-pear \
+    nginx supervisor procps python-pygments
+
 #downloading phabricator
 RUN mkdir -p /var/www/phabric/
 RUN git clone https://github.com/phacility/libphutil.git /var/www/phabric/libphutil
 RUN git clone https://github.com/phacility/arcanist.git /var/www/phabric/arcanist
 RUN git clone https://github.com/phacility/phabricator.git /var/www/phabric/phabricator
-#install php
-RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
-RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/php.list
-RUN apt-get update -y
-RUN apt-get install -y php7.4 php7.4-mysql php7.4-gd php7.4-curl php7.4-apcu php7.4-cli php7.4-json php7.4-mbstring php7.4-fpm php7.4-zip php-pear
-#install additional packages
-RUN apt-get install -y nginx supervisor procps python-pygments
+
 #copy nginx config
 COPY ./configs/nginx-ph.conf /etc/nginx/sites-available/phabricator.conf
 COPY ./configs/nginx.conf /etc/nginx/nginx.conf
@@ -26,14 +28,11 @@ RUN ln -s /etc/nginx/sites-available/phabricator.conf /etc/nginx/sites-enabled/p
 COPY ./configs/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 COPY ./configs/php.ini /etc/php/7.4/fpm/php.ini
 COPY ./configs/php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
-RUN mkdir -p /run/php
-RUN chown www-data:www-data /run/php
+RUN mkdir -p /run/php && chown www-data:www-data /run/php
 #copy supervisord config
 COPY ./configs/supervisord.conf /etc/supervisord.conf
 COPY ./scripts/startup.sh /startup.sh
 #copy startup script
-RUN mkdir -p /var/repo/
-#remove apt cache files
-RUN rm -rf /var/cache/apt
+RUN mkdir -p /var/repo/ && rm -rf /var/cache/apt
 #startup script
 ENTRYPOINT [ "/startup.sh" ]
