@@ -14,7 +14,7 @@ RUN apt-get update -y && apt-get install -y wget lsb-release && \
     apt-get update -y && \
     apt-get -y install apt-transport-https ca-certificates wget git \
     php7.4 php7.4-mysql php7.4-gd php7.4-curl php7.4-apcu php7.4-cli php7.4-json php7.4-mbstring php7.4-fpm php7.4-zip php-pear \
-    nginx supervisor procps python-pygments
+    nginx supervisor procps python-pygments openssh-server
 
 #downloading phabricator
 RUN mkdir -p /var/www/phabric/
