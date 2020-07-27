@@ -2,10 +2,10 @@ version: '3.7'
 
 services:
   ph-web:
-    image: rivshiell/phabricator-docker:latest
+    image: buddyspencer/phabricator:latest
     restart: always
     ports:
-      - "22:22"
+      - "8022:8022"
       - "80:80"
     depends_on:
       - ph-database

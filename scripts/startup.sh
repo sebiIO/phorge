@@ -2,8 +2,13 @@
 
 sleep 30
 
-useradd $GIT_USER
-usermod -p NP $GIT_USER
+if id "$GIT_USER" >/dev/null 2>&1; then
+        echo "user $GIT_USER already exists"
+else
+        useradd $GIT_USER
+        usermod -p NP $GIT_USER
+        echo "$GIT_USER ALL=(daemon) SETENV: NOPASSWD: /bin/ls, /usr/bin/git, /usr/bin/git-upload-pack, /usr/bin/git-receive-pack, /usr/bin/ssh" >> /etc/sudoers
+fi
 
 cp /var/www/phabric/phabricator/resources/sshd/phabricator-ssh-hook.sh /usr/libexec/phabricator-ssh-hook.sh
 sed "s/vcs-user/$GIT_USER/g" /usr/libexec/phabricator-ssh-hook.sh
