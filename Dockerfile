@@ -2,7 +2,9 @@ FROM debian:buster
 
 LABEL maintainer="buddyspencer@protonmail.com"
 
-ENV SSH_PORT=8022 GIT_USER=git MYSQL_PORT=3306
+ENV SSH_PORT=8022 
+ENV GIT_USER=git 
+ENV MYSQL_PORT=3306
 
 EXPOSE 8022 80 443
 
