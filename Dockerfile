@@ -30,7 +30,7 @@ COPY ./configs/nginx.conf /etc/nginx/nginx.conf
 RUN ln -s /etc/nginx/sites-available/phabricator.conf /etc/nginx/sites-enabled/phabricator.conf
 
 #copy ssh key generation
-COPY ./config/regenerate-ssh-keys.sh /regenerate-ssh-keys.sh
+COPY ./configs/regenerate-ssh-keys.sh /regenerate-ssh-keys.sh
 #copy php config
 COPY ./configs/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 COPY ./configs/php.ini /etc/php/7.4/fpm/php.ini
