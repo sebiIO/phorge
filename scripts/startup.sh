@@ -8,6 +8,7 @@ else
         useradd $GIT_USER
         usermod -p NP $GIT_USER
         echo "$GIT_USER ALL=(daemon) SETENV: NOPASSWD: /bin/ls, /usr/bin/git, /usr/bin/git-upload-pack, /usr/bin/git-receive-pack, /usr/bin/ssh" >> /etc/sudoers
+        chown -R $GIT_USER /var/repo
 fi
 
 mkdir /run/sshd
