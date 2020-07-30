@@ -36,6 +36,5 @@ RUN mkdir -p /run/php && chown www-data:www-data /run/php
 COPY ./configs/supervisord.conf /etc/supervisord.conf
 COPY ./scripts/startup.sh /startup.sh
 #copy startup script
-RUN mkdir -p /var/repo/ && rm -rf /var/cache/apt && chown -R $GIT_USER /var/repo
-#startup script
+RUN mkdir -p /var/repo/ && rm -rf /var/cache/apt
 CMD [ "/startup.sh" ]
