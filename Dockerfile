@@ -1,4 +1,5 @@
-FROM debian:buster
+ARG BASE_ARCH=amd64
+FROM ${BASE_ARCH}/debian:buster
 
 LABEL maintainer="buddyspencer@protonmail.com"
 
