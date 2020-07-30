@@ -25,6 +25,8 @@ cp /var/www/phabric/phabricator/resources/sshd/sshd_config.phabricator.example /
 sed -i "s/vcs-user/$GIT_USER/g" /etc/ssh/sshd_config.phabricator
 sed -i "s/2222/$SSH_PORT/g" /etc/ssh/sshd_config.phabricator
 
+sh /regenerate-ssh-keys.sh
+
 #SSH Configuration
 /var/www/phabric/phabricator/bin/config set diffusion.ssh-port $SSH_PORT
 /var/www/phabric/phabricator/bin/config set files.enable-imagemagick true
