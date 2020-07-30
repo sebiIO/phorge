@@ -61,7 +61,7 @@ then
       \"protocol\": \"$SMTP_PROTOCOL\"
     }
   }
-]" > mailer.json
+]" > mailers.json
     /var/www/phabric/phabricator/bin/config set cluster.mailers --stdin < mailers.json
     rm mailers.json
 fi
