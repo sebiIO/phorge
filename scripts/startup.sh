@@ -62,7 +62,7 @@ fi
 
 # Update base uri
 /var/www/phabric/phabricator/bin/config set phabricator.base-uri "http://$BASE_URI/"
-sed "s/  server_name phabricator.local;/  server_name $BASE_URI;/g" /etc/nginx/sites-available//phabricator.conf > /etc/nginx/sites-available/phabricator.conf
+sed "s/  server_name phabricator.local;/  server_name $BASE_URI;/g" /etc/nginx/sites-available/phabricator.conf > /etc/nginx/sites-available/phabricator.conf
 #sed "s/    return 301 \$scheme:\/\/phabricator.local$request_uri;"
 #general parameters configuration
 /var/www/phabric/phabricator/bin/config set pygments.enabled true
