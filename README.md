@@ -16,6 +16,7 @@ To startup Phabricator with a single command you need configured MySQL/MariaDB a
 ### Variables
 |Name|Default Value|
 |---|---|
+|PROTOCOL|http|
 |SSH_PORT|8022|
 |GIT_USER|git|
 |MYSQL_HOST||
