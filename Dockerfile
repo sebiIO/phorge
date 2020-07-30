@@ -13,7 +13,7 @@ RUN apt-get update -y && apt-get install -y wget lsb-release && \
     wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
     echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" >> /etc/apt/sources.list.d/php.list && \
     apt-get update -y && \
-    apt-get -y install sudo apt-transport-https ca-certificates wget git \
+    apt-get -y install mercurial subversion sudo apt-transport-https ca-certificates wget git \
     php7.4 php7.4-mysql php7.4-gd php7.4-curl php7.4-apcu php7.4-cli php7.4-json php7.4-mbstring php7.4-fpm php7.4-zip php-pear \
     nginx supervisor procps python-pygments openssh-server && \
     ln -s /usr/lib/git-core/git-http-backend /usr/bin/git-http-backend
