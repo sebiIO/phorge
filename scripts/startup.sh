@@ -9,6 +9,8 @@ else
         usermod -p NP $GIT_USER
         echo "$GIT_USER ALL=(daemon) SETENV: NOPASSWD: /bin/ls, /usr/bin/git, /usr/bin/git-upload-pack, /usr/bin/git-receive-pack, /usr/bin/ssh" >> /etc/sudoers
         chown -R $GIT_USER /var/repo
+        /var/www/phabric/phabricator/bin/config set phd.user $GIT_USER
+        /var/www/phabric/phabricator/bin/config set diffusion.ssh-user $GIT_USER
 fi
 
 mkdir /run/sshd
@@ -25,13 +27,14 @@ sed -i "s/2222/$SSH_PORT/g" /etc/ssh/sshd_config.phabricator
 
 #SSH Configuration
 /var/www/phabric/phabricator/bin/config set diffusion.ssh-port $SSH_PORT
-/var/www/phabric/phabricator/bin/config set diffusion.ssh-user $GIT_USER
 /var/www/phabric/phabricator/bin/config set files.enable-imagemagick true
 #DB configuration
 /var/www/phabric/phabricator/bin/config set mysql.host $MYSQL_HOST
 /var/www/phabric/phabricator/bin/config set mysql.port $MYSQL_PORT
 /var/www/phabric/phabricator/bin/config set mysql.user $MYSQL_USER
 /var/www/phabric/phabricator/bin/config set mysql.pass $MYSQL_PASSWORD
+/var/www/phabric/phabricator/bin/config set diffusion.allow-http-auth true
+
 #Large file storage configuration
 if [ ! -z "$MINIO_SERVER" ]
 then
@@ -62,7 +65,7 @@ then
 fi
 
 # Update base uri
-/var/www/phabric/phabricator/bin/config set phabricator.base-uri "http://$BASE_URI/"
+/var/www/phabric/phabricator/bin/config set phabricator.base-uri "$PROTOCOL://$BASE_URI/"
 sed -i "s/  server_name phabricator.local;/  server_name $BASE_URI;/g" /etc/nginx/sites-available/phabricator.conf
 #sed "s/    return 301 \$scheme:\/\/phabricator.local$request_uri;"
 #general parameters configuration
