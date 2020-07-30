@@ -1,13 +1,10 @@
-![Docker Image CI](https://github.com/ThelonKarrde/phabricator-docker/workflows/Docker%20Image%20CI/badge.svg)
-
 # Phabricator-Docker
 
 This is an unofficial Docker image of Phabricator app.  
 Application configured as a single image with `supervisord` to control all necessary processes inside one docker container.  
 
 ## Docker image available for OS/ARCH
-* `linux/amd64` | tag: `latest`
-* `linux/arm` | tag: `armv7`
+* `linux/amd64, linux/arm64` | tag: `latest`
 
 ## Configuration
 
@@ -48,7 +45,7 @@ docker run \
     --env MINIO_SERVER_SECRET_KEY=secret_key \
     --env BASE_URI=yourdomain.com \
     -v /your/repo/folder:/var/repo
-    rivshiell/phabricator-docker:latest
+    buddyspencer/phabricator:latest
 ```
 
 ### To launch all components of Phabricator using `docker-compose` use following set of commands:
@@ -60,4 +57,4 @@ docker-compose up -d
 ```
 
 ## Links
-[Docker hub](https://hub.docker.com/repository/docker/rivshiell/phabricator-docker)
+[Docker hub](https://hub.docker.com/r/buddyspencer/phabricator)
