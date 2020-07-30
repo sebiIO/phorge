@@ -51,7 +51,7 @@ if [ ! -z "$SMTP_SERVER" ] && [ ! -z "$SMTP_PORT" ] && [ ! -z "$SMTP_USER" ] && 
 then
     echo "[
   {
-    \"key\": \"stmp-mailer\",
+    \"key\": \"smtp-mailer\",
     \"type\": \"smtp\",
     \"options\": {
       \"host\": \"$SMTP_SERVER\",
