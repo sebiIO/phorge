@@ -5,6 +5,7 @@ LABEL maintainer="buddyspencer@protonmail.com"
 ENV SSH_PORT=8022 
 ENV GIT_USER=git 
 ENV MYSQL_PORT=3306
+ENV PROTOCOL=http
 
 EXPOSE 8022 80 443
 
