@@ -37,6 +37,12 @@ sh /regenerate-ssh-keys.sh
 /var/www/phabric/phabricator/bin/config set mysql.pass $MYSQL_PASSWORD
 /var/www/phabric/phabricator/bin/config set diffusion.allow-http-auth true
 
+if [ "$PROTOCOL" == "https" ]
+then
+    echo "<?php
+$_SERVER['HTTPS'] = true;" > /var/www/phabric/phabricator/support/preamble.php
+fi
+
 #Large file storage configuration
 if [ ! -z "$MINIO_SERVER" ]
 then
