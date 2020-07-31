@@ -39,8 +39,9 @@ sh /regenerate-ssh-keys.sh
 
 if [ "$PROTOCOL" == "https" ]
 then
-    echo "<?php
-$_SERVER['HTTPS'] = true;" > /var/www/phabric/phabricator/support/preamble.php
+    echo '<?php
+
+$_SERVER['HTTPS'] = true;' > /var/www/phabric/phabricator/support/preamble.php
 fi
 
 #Large file storage configuration
