@@ -24,7 +24,6 @@ services:
     restart: always
     volumes:
       - database-volume:/var/lib/mysql
-      - ./configs/my.cnf:/etc/mysql/my.cnf
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
   ph-storage:
