@@ -41,7 +41,7 @@ if [ "$PROTOCOL" == "https" ]
 then
     echo '<?php
 
-$_SERVER['HTTPS'] = true;' > /var/www/phabric/phabricator/support/preamble.php
+$_SERVER['"'"'HTTPS'"'"'] = true;' > /var/www/phabric/phabricator/support/preamble.php
 fi
 
 #Large file storage configuration
