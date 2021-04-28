@@ -1,5 +1,5 @@
 ARG BASE_ARCH=amd64
-FROM ${BASE_ARCH}/debian:buster
+FROM ${BASE_ARCH}/debian:buster-slim
 
 LABEL maintainer="buddyspencer@protonmail.com"
 
@@ -21,9 +21,9 @@ RUN apt-get update -y && apt-get install -y wget lsb-release && \
 
 #downloading phabricator
 RUN mkdir -p /var/www/phabric/
-RUN git clone https://github.com/phacility/libphutil.git /var/www/phabric/libphutil
-RUN git clone https://github.com/phacility/arcanist.git /var/www/phabric/arcanist
-RUN git clone https://github.com/phacility/phabricator.git /var/www/phabric/phabricator
+RUN git clone https://github.com/phacility/libphutil.git /var/www/phabric/libphutil\
+    && git clone https://github.com/phacility/arcanist.git /var/www/phabric/arcanist\
+    && git clone https://github.com/phacility/phabricator.git /var/www/phabric/phabricator
 
 #copy nginx config
 COPY ./configs/nginx-ph.conf /etc/nginx/sites-available/phabricator.conf
