@@ -19,16 +19,15 @@ RUN apt-get update -y && apt-get install -y wget lsb-release && \
     nginx supervisor procps python-pygments openssh-server && \
     ln -s /usr/lib/git-core/git-http-backend /usr/bin/git-http-backend
 
-#downloading phabricator
-RUN mkdir -p /var/www/phabric/
-RUN git clone https://github.com/phacility/libphutil.git /var/www/phabric/libphutil\
-    && git clone https://github.com/phacility/arcanist.git /var/www/phabric/arcanist\
-    && git clone https://github.com/phacility/phabricator.git /var/www/phabric/phabricator
+#downloading phorge
+RUN mkdir -p /var/www/phorge/
+RUN git clone https://we.phorge.it/source/arcanist.git /var/www/phorge/arcanist\
+    && git clone https://we.phorge.it/source/phorge.git /var/www/phorge/phorge
 
 #copy nginx config
-COPY ./configs/nginx-ph.conf /etc/nginx/sites-available/phabricator.conf
+COPY ./configs/nginx-ph.conf /etc/nginx/sites-available/phorge.conf
 COPY ./configs/nginx.conf /etc/nginx/nginx.conf
-RUN ln -s /etc/nginx/sites-available/phabricator.conf /etc/nginx/sites-enabled/phabricator.conf
+RUN ln -s /etc/nginx/sites-available/phorge.conf /etc/nginx/sites-enabled/phorge.conf
 
 #copy ssh key generation
 COPY ./configs/regenerate-ssh-keys.sh /regenerate-ssh-keys.sh

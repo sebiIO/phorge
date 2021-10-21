@@ -1,6 +1,6 @@
-# Phabricator-Docker
+# Phorge-Docker
 
-This is an unofficial Docker image of Phabricator app.  
+This is an unofficial Docker image of Phorge app.  
 Application configured as a single image with `supervisord` to control all necessary processes inside one docker container.  
 
 ## Docker image available for OS/ARCH
@@ -8,7 +8,7 @@ Application configured as a single image with `supervisord` to control all neces
 
 ## Configuration
 
-To startup Phabricator with a single command you need configured MySQL/MariaDB and S3 storage (Local server or AWS)
+To startup Phorge with a single command you need configured MySQL/MariaDB and S3 storage (Local server or AWS)
 
 ### Variables
 |Name|Default Value|
@@ -45,10 +45,10 @@ docker run \
     --env MINIO_SERVER_SECRET_KEY=secret_key \
     --env BASE_URI=yourdomain.com \
     -v /your/repo/folder:/var/repo
-    buddyspencer/phabricator:latest
+    buddyspencer/phorge:latest
 ```
 
-### To launch all components of Phabricator using `docker-compose` use following set of commands:
+### To launch all components of Phorge using `docker-compose` use following set of commands:
 #### `amd64` arch:
 ```
 export BASE_URI=yourdomain.com
@@ -57,4 +57,4 @@ docker-compose up -d
 ```
 
 ## Links
-[Docker hub](https://hub.docker.com/r/buddyspencer/phabricator)
+[Docker hub](https://hub.docker.com/r/buddyspencer/phorge)
