@@ -1,5 +1,4 @@
-ARG BASE_ARCH=amd64
-FROM ${BASE_ARCH}/debian:buster-slim
+FROM debian:buster-slim
 
 LABEL maintainer="buddyspencer@protonmail.com"
 
