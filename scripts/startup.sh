@@ -7,7 +7,7 @@ if id "$GIT_USER" >/dev/null 2>&1; then
 else
         useradd $GIT_USER
         usermod -p NP $GIT_USER
-        echo "$GIT_USER ALL=(daemon) SETENV: NOPASSWD: /bin/ls, /usr/bin/git, /usr/bin/git-upload-pack, /usr/bin/git-receive-pack, /usr/bin/ssh" >> /etc/sudoers
+        echo "$GIT_USER ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
         chown -R $GIT_USER /var/repo
         /var/www/phorge/phorge/bin/config set phd.user $GIT_USER
         /var/www/phorge/phorge/bin/config set diffusion.ssh-user $GIT_USER
