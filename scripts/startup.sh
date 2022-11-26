@@ -73,6 +73,9 @@ then
     rm mailers.json
 fi
 
+# set metamta.default-address
+/var/www/phorge/phorge/bin/config set metamta.default-address $MAIL_DEFAULT_ADDRESS
+
 # Update base uri
 /var/www/phorge/phorge/bin/config set phorge.base-uri "$PROTOCOL://$BASE_URI/"
 sed -i "s/  server_name phorge.local;/  server_name $BASE_URI;/g" /etc/nginx/sites-available/phorge.conf
